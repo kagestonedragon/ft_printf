@@ -2,6 +2,8 @@
 
 void    init_precision(t_printf *pf)
 {
-    pf->precision.exist = false;
-    pf->precision.precision = 0;
+    pf->precision.exist_integer = false;
+    pf->precision.exist_fractional = false;
+    pf->precision.integer = 0;
+    pf->precision.fractional = 0;
 }

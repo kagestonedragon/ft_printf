@@ -3,17 +3,17 @@
 
 int		test_flags(t_printf *pf)
 {
-	if (pf->flags.exist == true)
+	if (pf->flag.exist == true)
 	{
-		if (pf->flags.minus == true)
+		if (pf->flag.minus == true)
 			printf("Yes flag minus\n");
-		if (pf->flags.plus == true)
+		if (pf->flag.plus == true)
 			printf("Yes flag plus\n");
-		if (pf->flags.space == true)
+		if (pf->flag.space == true)
 			printf("Yes flag space\n");
-		if (pf->flags.sharp == true)
+		if (pf->flag.sharp == true)
 			printf("Yes flag sharp\n");
-		if (pf->flags.zero == true)
+		if (pf->flag.zero == true)
 			printf("Yes flag zero\n");
 	}
 	else
@@ -32,10 +32,14 @@ int		test_width(t_printf *pf)
 
 int		test_precision(t_printf *pf)
 {
-	if (pf->precision.exist == true)
-		printf("Yes precision - %d\n", pf->precision.precision);
+	if (pf->precision.exist_integer == true)
+		printf("Yes integer precision - %d\n", pf->precision.integer);
 	else
-		printf("No precision\n");
+		printf("No integer precision\n");
+    if (pf->precision.exist_fractional == true)
+        printf("Yes fractional precision - %d\n", pf->precision.fractional);
+    else
+        printf("No fractional precision\n");
 	return (0);
 }
 
@@ -70,7 +74,7 @@ int		test_type(t_printf *pf)
 		if (pf->type.u == true)
 			printf("Yes type u\n");
 		if (pf->type.f == true)
-			pritnf("Yes type f\n");
+			printf("Yes type f\n");
 		if (pf->type.x == true)
 			printf("Yes type x\n");
 		if (pf->type.hx == true)

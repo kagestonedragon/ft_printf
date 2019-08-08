@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <emedea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/06 21:10:48 by emedea            #+#    #+#             */
-/*   Updated: 2019/05/17 10:43:31 by emedea           ###   ########.fr       */
+/*   Created: 2019/04/05 22:04:53 by emedea            #+#    #+#             */
+/*   Updated: 2019/05/17 10:36:59 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-void	ft_strclr(char *s)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (!s)
-		return ;
-	while (*s)
-		*s++ = '\0';
+	while ((*s1 || *s2) && n--)
+	{
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
+	}
+	return (0);
 }
