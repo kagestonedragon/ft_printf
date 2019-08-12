@@ -1,9 +1,9 @@
 #include "ft_printf.h"
 
-t_bool  save_width_from_string(t_printf *pf, int width)
+t_bool  save_width_from_string(t_printf *pf, const char *format, int *i)
 {
     pf->width.exist = true;
-    pf->width.width = width;
+    pf->width.width = ft_atoi(&format[*i]);
     return (true);
 }
 

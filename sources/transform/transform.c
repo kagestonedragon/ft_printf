@@ -1,12 +1,12 @@
  #include "ft_printf.h"
 
-int     transform(t_printf *pf, int *len)
+int     transform(t_printf *pf, va_list args, int *len)
 {
     if (pf->type.exist == true)
     {
         if (pf->type.d == true)
-            transform_d(pf, len);
-        else if (pf->type.i == true)
+            transform_d(pf, args, len);
+        /*else if (pf->type.i == true)
             transform_i(pf, len);
         else if (pf->type.u == true)
             transform_u(pf, len);
@@ -23,7 +23,7 @@ int     transform(t_printf *pf, int *len)
         else if (pf->type.c == true)
             transform_c(pf, len);
         else if (pf->type.p == true)
-            transofrm_p(pf, len);
+            transform_p(pf, len);*/
     }
     return (0);
 }

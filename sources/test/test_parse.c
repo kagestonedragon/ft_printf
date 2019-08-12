@@ -32,14 +32,10 @@ int		test_width(t_printf *pf)
 
 int		test_precision(t_printf *pf)
 {
-	if (pf->precision.exist_integer == true)
-		printf("Yes integer precision - %d\n", pf->precision.integer);
+	if (pf->precision.exist == true)
+		printf("Yes precision - %d\n", pf->precision.precision);
 	else
-		printf("No integer precision\n");
-    if (pf->precision.exist_fractional == true)
-        printf("Yes fractional precision - %d\n", pf->precision.fractional);
-    else
-        printf("No fractional precision\n");
+		printf("No precision\n");
 	return (0);
 }
 
