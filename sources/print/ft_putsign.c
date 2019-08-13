@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putsign.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/28 15:14:45 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/13 19:52:14 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/13 18:42:47 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/13 19:26:47 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	putnbr(int n, int *len)
+int	ft_putsign(t_printf *pf, int d)
 {
-	if (n < 0)
+	if (pf->flag.plus && d > 0)
 	{
-		if (n == -2147483648)
-		{
-			*len += 11;
-			ft_putstr("2147483648");
-			return ;
-		}
-		n = -n;
+		ft_putchar('+');
+		return (1);
 	}
-	if (n > 9)
-		putnbr(n / 10, len);
-	*len += 1;
-	ft_putchar((n % 10) + '0');
+	if (pf->flag.space && d > 0)
+	{
+		ft_putchar(' ');
+		return (1);
+	}
+	if (d < 0)
+	{
+		ft_putchar('-');
+		return (1);
+	}
+	return (0);
 }

@@ -42,7 +42,7 @@ SRC_SAVE_TYPE_FILES = save_type_c.c save_type_d.c save_type_f.c save_type_hx.c s
 
 SRC_TRANS_FILES = transform.c transform_d.c
 
-SRC_PRINT_FILES = putnbr.c
+SRC_PRINT_FILES = ft_putspaces.c ft_putsign.c ft_putzeros.c putnbr.c
 
 SRC_TEST_FILES = test_parse.c
 

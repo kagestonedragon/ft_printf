@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: emedea <emedea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/28 15:14:45 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/13 19:52:14 by emedea           ###   ########.fr       */
+/*   Created: 2019/04/04 19:55:12 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/13 20:29:52 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	putnbr(int n, int *len)
+void	ft_bzero(void *s, int n)
 {
-	if (n < 0)
-	{
-		if (n == -2147483648)
-		{
-			*len += 11;
-			ft_putstr("2147483648");
-			return ;
-		}
-		n = -n;
-	}
-	if (n > 9)
-		putnbr(n / 10, len);
-	*len += 1;
-	ft_putchar((n % 10) + '0');
+	char *ch;
+
+	ch = (char *)s;
+	while (n--)
+		*ch++ = 0;
 }

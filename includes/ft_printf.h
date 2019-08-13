@@ -6,7 +6,7 @@
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:31:57 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/12 17:01:18 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/13 21:09:42 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,20 @@ typedef struct	    s_type{
 	t_bool		    p;
 }				    t_type;
 
+typedef struct		s_transform{
+	int				width;
+	int				precision;
+	int				number_of_signs;
+}					t_transform;
+
 typedef struct	    s_printf{
 	t_flag		    flag;
 	t_type		    type;
 	t_width		    width;
 	t_length        length;
     t_precision     precision;
+	t_transform		transform;
 }				    t_printf;
-
-typedef struct		s_transform{
-	char			*flag_plus;
-	char			*flag_minus;
-	char			*flag_space;
-	char			*flag_sharp;
-	char			*flag_zero;
-	char			*precision;
-}					t_transform;
 
 // Printf
 int                 ft_printf(const char *format, ...);
@@ -162,6 +160,9 @@ int                 transform_c(t_printf *pf, int *len);
 int                 transform_p(t_printf *pf, int *len);*/
 
 // Print
+int					ft_putsign(t_printf *pf, int d);
+int					ft_putzeros(t_printf *pf, int n);
+int					ft_putspaces(t_printf *pf, int d, int n);
 void				putnbr(int n, int *len);
 
 // Misc
@@ -174,6 +175,11 @@ void				ft_putstr(char const *s);
 int					ft_strlen(const char *s);
 int					ft_putchar(char c);
 char				*create_width_string(int size, char c);
+void				ft_bzero(void *s, int n);
+
+
+// Buffer
+char				*create_buffer(t_printf *pf, int number_of_signs, int sign);
 
 // Test
 int					test_parse(t_printf *pf);

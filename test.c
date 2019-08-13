@@ -2,8 +2,8 @@
 #include <stdio.h>
 int		main(void)
 {
-	ft_printf("%010d", 5);
+	ft_printf("%+-.2d", 5000);
 	printf("\n");
-	printf("%010d\n", 5);
+	printf("pf = %d\n", printf("%+-.2d\n", 5000));
 	return (0);
 }

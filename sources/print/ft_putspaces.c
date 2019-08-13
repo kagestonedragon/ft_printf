@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putspaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/28 15:14:45 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/13 19:52:14 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/13 18:39:23 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/13 20:25:10 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	putnbr(int n, int *len)
+int		ft_putspaces(t_printf *pf, int d, int n)
 {
-	if (n < 0)
+	int	i;
+
+	(void)n;
+	if (((pf->flag.plus || pf->flag.space) && d > 0) || (pf->flag.minus && d < 0))
+		pf->width.width--;
+	if (!pf->width.exist || n < 0)
+		return (0);
+	else
 	{
-		if (n == -2147483648)
-		{
-			*len += 11;
-			ft_putstr("2147483648");
-			return ;
-		}
-		n = -n;
+		i = -1;
+		while (++i < pf->width.width - pf->precision.precision - 1)
+			ft_putchar(' ');
 	}
-	if (n > 9)
-		putnbr(n / 10, len);
-	*len += 1;
-	ft_putchar((n % 10) + '0');
+	return (i);
 }

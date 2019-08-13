@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putzeros.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/28 15:14:45 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/13 19:52:14 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/13 18:40:36 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/13 19:18:52 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	putnbr(int n, int *len)
+int		ft_putzeros(t_printf *pf, int n)
 {
-	if (n < 0)
+	int	i;
+
+	if (!pf->precision.exist || n < 0)
+		return (0);
+	else
 	{
-		if (n == -2147483648)
-		{
-			*len += 11;
-			ft_putstr("2147483648");
-			return ;
-		}
-		n = -n;
+		i = -1;
+		while (++i < n)
+			ft_putchar('0');
 	}
-	if (n > 9)
-		putnbr(n / 10, len);
-	*len += 1;
-	ft_putchar((n % 10) + '0');
+	return (i);
 }

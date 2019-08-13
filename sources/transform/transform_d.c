@@ -3,57 +3,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int			save_transform_space(t_printf *pf)
+int			actions(t_printf *pf, int d, int nos, int *len)
 {
-	free(pf->transform->flag_space);
-	pf->transform->flag_space = (char *)malloc(sizeof(char) * 2);
-	pf->transform->flag_space[0] = ' ';
-	pf->transform->flag_space[1] = '\0';
-	pf->width.width--;
-	return (0);
-}
-
-int			save_transform_plus(t_printf *pf)
-{
-	free(pf->transform->flag_plus);
-	pf->transform->flag_plus = (char *)malloc(sizeof(char) * 2);
-	pf->transform->flag_plus[0] = '+';
-	pf->transform->flag_plus[1] = '\0';
-	pf->width.width--;
-	return (0);
-}
-
-int			save_transform_precision(t_printf *pf, int nos)
-{
-	free(pf->transform.precision);
-	pf->transform->precision = create_width_string(pf->width.width - nos, '0');
-	return (0);
-}
-
-static int	transform_d_flag(t_printf *pf, int d, int *len, int nos)
-{
-	char	*width;
-
-	if (pf->flag.space && !pf->flag.plus && d > 0)
-		save_transform_space(pf);
-	else if (pf->flag.plus && d > 0)
-		save_transform_plus(pf);
-	else if (pf->precision.exist && nos < pf->precision.precision)
-		save_transform_precision(pf, nos);
-	else if (pf->length.exist)
-		
-	else if (pf->flag.minus && pf->width.exist)
+	if (pf->flag.minus)
 	{
+		*len += ft_putsign(pf, d);
+		printf("c after putsign: %d\n", *len);
+		*len += ft_putzeros(pf, pf->precision.precision - nos);
+		printf("c after putzeros: %d\n", *len);
 		putnbr(d, len);
-		width = create_width_string(pf->width.width - nos, ' ');
-		ft_putstr(width);
-		free(width);
+		printf("c after putnbr: %d\n", *len);		
+		*len += ft_putspaces(pf, d, pf->width.width - pf->precision.precision - 1);
+		printf("c after putspaces: %d\n", *len);
 	}
-	else if (pf->flag.zero && !pf->flag.minus && !pf->precision.exist)
+	else
 	{
-		width = create_width_string(pf->width.width - nos, '0');
-		ft_putstr(width);
-		free(width);
+		ft_putspaces(pf, d, pf->width.width - pf->precision.precision - 1);
+		ft_putsign(pf, d);
+		ft_putzeros(pf, pf->precision.precision - nos);
 		putnbr(d, len);
 	}
 	return (0);
@@ -62,11 +29,11 @@ static int	transform_d_flag(t_printf *pf, int d, int *len, int nos)
 int     	transform_d(t_printf *pf, va_list args, int *len)
 {
     int		d;
-    int 	nos;
+	int		nos;
 
-    d = va_arg(args, int);
-    nos = number_of_signs(d);
+	d = va_arg(args, int);
+	nos = number_of_signs(d);
     if (pf->flag.exist)
-		transform_d_flag(pf, d, len, nos);
+		actions(pf, d, nos, len);
 	return (0);
 }
