@@ -8,11 +8,8 @@ int			actions(t_printf *pf, int d, int nos, int *len)
 	if (pf->flag.minus)
 	{
 		*len += ft_putsign(pf, d);
-		printf("c after putsign: %d\n", *len);
 		*len += ft_putzeros(pf, pf->precision.precision - nos);
-		printf("c after putzeros: %d\n", *len);
 		putnbr(d, len);
-		printf("c after putnbr: %d\n", *len);		
 		*len += ft_putspaces(pf, d, pf->width.width - pf->precision.precision - 1);
 		printf("c after putspaces: %d\n", *len);
 	}
