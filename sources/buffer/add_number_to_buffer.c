@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_precision_to_buffer.c                          :+:      :+:    :+:   */
+/*   add_number_to_buffer.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/13 21:38:02 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/15 15:43:27 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/15 14:17:29 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/15 15:43:54 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		add_precision_to_buffer(char *buffer, t_printf *pf, int number_of_signs, int position)
+int			add_number_to_buffer(char *buffer, int position, int d)
 {
-	int	i;
-	int	count;
+	char	*number;
 
-	i = 0;
-	count = pf->precision.precision - number_of_signs;
-	if (pf->precision.exist && count > 0)
-	{
-		while (i < count)
-		{
-			buffer[position++] = '0';
-			i++;
-		}
-	}
+	number = ft_itoa(d);
+	while (*number)
+		buffer[position++] = *number++;
 	return (position);
 }

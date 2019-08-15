@@ -6,7 +6,7 @@
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:31:57 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/13 21:09:42 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/15 16:29:43 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,10 +176,15 @@ int					ft_strlen(const char *s);
 int					ft_putchar(char c);
 char				*create_width_string(int size, char c);
 void				ft_bzero(void *s, int n);
-
+char				*ft_itoa(int n);
 
 // Buffer
 char				*create_buffer(t_printf *pf, int number_of_signs, int sign);
+int					add_number_to_buffer(char *buffer, int position, int d);
+int					add_precision_to_buffer(char *buffer, t_printf *pf, int number_of_signs, int position);
+int					add_sign_to_buffer(char *buffer, t_printf *pf, int sign, int position);
+int					add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int position);
+
 
 // Test
 int					test_parse(t_printf *pf);
