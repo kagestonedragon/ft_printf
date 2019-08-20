@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rhulk <rhulk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:31:57 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/20 13:38:32 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/20 15:34:16 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,14 @@ t_bool              save_type_p(t_printf *pf);
 int					choose_length_decimal(t_printf *pf, va_list args, int *len);
 
 // Transorm from structures to string
+char				*fill_buffer(t_printf *pf, int sign, int d, int nos);
+char		*fill_buffer_l(t_printf *pf, int sign, long d, int nos);
 int                 transform(t_printf *pf, va_list args, int *len);
 int                 transform_d(t_printf *pf, va_list args, int *len);
+int					transform_d_hh(t_printf *pf, va_list args, int *len);
+int					transform_d_h(t_printf *pf, va_list args, int *len);
+int					transform_d_l(t_printf *pf, va_list args, int *len);
+int					transform_d_ll(t_printf *pf, va_list args, int *len);
 /*int                 transform_i(t_printf *pf, int *len);
 int                 transform_u(t_printf *pf, int *len);
 int                 transform_f(t_printf *pf, int *len);
@@ -172,6 +178,8 @@ void				putnbr(int n, int *len);
 void                skip_numbers(const char *format, int *i);
 void                skip_letters(int *i, int rep);
 int                 number_of_signs(int n);
+int     			number_of_signs_l(long n);
+int     number_of_signs_ll(long long n);
 int                 ft_atoi(const char *str);
 int                 ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_putstr(char const *s);
@@ -180,13 +188,17 @@ int					ft_putchar(char c);
 char				*create_width_string(int size, char c);
 void				ft_bzero(void *s, int n);
 char				*ft_itoa(int n);
+char				*ft_itoa_l(long n);
+char			*ft_itoa_ll(long long n);
 
 // Buffer
 char				*create_buffer(t_printf *pf, int number_of_signs, int sign);
-int					add_number_to_buffer(char *buffer, int position, int d);
-int					add_precision_to_buffer(char *buffer, t_printf *pf, int number_of_signs, int position);
-int					add_sign_to_buffer(char *buffer, t_printf *pf, int sign, int position);
-int					add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int position);
+int					add_number_to_buffer(char *buffer, int *position, int d);
+int			add_number_to_buffer_l(char *buffer, int *position, long d);
+int			add_number_to_buffer_ll(char *buffer, int *position, long long d);
+int					add_precision_to_buffer(char *buffer, t_printf *pf, int number_of_signs, int *position);
+int					add_sign_to_buffer(char *buffer, t_printf *pf, int sign, int *position);
+int					add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int *position);
 
 
 // Test

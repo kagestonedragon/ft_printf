@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_width_to_buffer.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rhulk <rhulk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 14:14:30 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/20 13:24:11 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/20 14:35:48 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int position)
+int		add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int *position)
 {
 	int	size;
 	int	size2;
@@ -35,13 +35,13 @@ int		add_width_to_buffer(char *buffer, t_printf *pf, int nos, int sign, int posi
 	if ((sign && (pf->flag.plus || pf->flag.space)) || (!sign))
 		size--;
 	if (size < 0)
-		return (position);
+		return (0);
 	size2 = 0;
 	while (size2 < size)
 	{
-		buffer[position] = c;
-		position++;
+		buffer[*position] = c;
+		*position += 1;
 		size2++;
 	}
-	return (position);
+	return (0);
 }

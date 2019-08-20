@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_new.c                                      :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rhulk <rhulk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 18:43:03 by emedea            #+#    #+#             */
-/*   Updated: 2019/05/17 10:39:40 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/20 14:51:09 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static int		sym_counter(int n)
 	int			result;
 
 	result = 1;
-	if (n < 0)
-		result++;
 	while (n /= 10)
 		result++;
 	return (result);
@@ -33,9 +31,7 @@ char			*ft_itoa(int n)
 		return (NULL);
 	i = sym_counter(n);
 	result[i--] = '\0';
-	if (n < 0)
-		result[0] = '-';
-	else if (!n)
+	if (!n)
 		result[0] = '0';
 	while (n)
 	{

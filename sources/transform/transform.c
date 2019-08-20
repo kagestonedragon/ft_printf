@@ -5,7 +5,7 @@ int     transform(t_printf *pf, va_list args, int *len)
     if (pf->type.exist == true)
     {
         if (pf->type.d == true)
-            transform_d(pf, args, len);
+			choose_length_decimal(pf, args, len);
         /*else if (pf->type.i == true)
             transform_i(pf, len);
         else if (pf->type.u == true)
