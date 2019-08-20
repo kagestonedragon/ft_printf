@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_sign_to_buffer.c                               :+:      :+:    :+:   */
+/*   choose_length_decimal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/13 21:30:44 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/20 13:09:21 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/20 11:38:21 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/20 13:32:49 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		add_sign_to_buffer(char *buffer, t_printf *pf, int sign, int position)
+int		choose_length_decimal(t_printf *pf, va_list args, int *len)
 {
-	if (sign == 1)
+	if (pf->length.exist)
 	{
-		if (pf->flag.plus)
-		{
-			buffer[position] = '+';
-			return (position + 1);
-		}
-		else if (pf->flag.space)
-		{
-			buffer[position] = ' ';
-			return (position + 1);
-		}
+		(pf->length.hh) ? transform_d_hh(pf, args, len) : 0;
+		(pf->length.h) ? transform_d_h(pf, args, len) : 0;
+		(pf->length.l) ? transform_d_l(pf, args, len) : 0;
+		(pf->length.ll) ? transform_d_ll(pf, args, len) : 0;
 	}
-	else if (sign == 0)
-	{
-		buffer[position] = '-';
-		return (position + 1);
-	}
-	return (position);
+	else
+		transform_d(pf, args, len);
+	return (0);
 }

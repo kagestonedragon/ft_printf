@@ -6,7 +6,7 @@
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:31:57 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/15 16:29:43 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/20 13:38:32 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,9 @@ t_bool              save_type_o(t_printf *pf);
 t_bool              save_type_s(t_printf *pf);
 t_bool              save_type_c(t_printf *pf);
 t_bool              save_type_p(t_printf *pf);
+
+// Find length
+int					choose_length_decimal(t_printf *pf, va_list args, int *len);
 
 // Transorm from structures to string
 int                 transform(t_printf *pf, va_list args, int *len);
