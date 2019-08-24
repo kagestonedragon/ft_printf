@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa_new.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhulk <rhulk@student.42.fr>                +#+  +:+       +#+        */
+/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 18:43:03 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/20 14:51:09 by rhulk            ###   ########.fr       */
+/*   Updated: 2019/08/24 14:47:40 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char			*ft_itoa(int n)
 	char		*result;
 	int			i;
 
+	n = (n > 0) ? n : -n;
 	if (!(result = (char *)malloc(sizeof(char) * (sym_counter(n) + 1))))
 		return (NULL);
 	i = sym_counter(n);
@@ -37,8 +38,6 @@ char			*ft_itoa(int n)
 	{
 		if (n > 0)
 			result[i--] = (n % 10) + '0';
-		else
-			result[i--] = (-(n % 10)) + '0';
 		n /= 10;
 	}
 	return (result);

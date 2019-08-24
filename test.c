@@ -1,12 +1,9 @@
-
-#include <stdio.h>
-#include <stdlib.h>
 #include "includes/ft_printf.h"
+#include <stdio.h>
 
 int		main(void)
 {
-	ft_printf("%+#-13.4lld", 9223372036854775808);
-	printf("\n");
-	printf("%+#-13.4lld", 9223372036854775808);
+	//ft_printf("%hhd  %% popa", 52456);
+	ft_printf("%10.2s", "JOPA");
 	return (0);
 }

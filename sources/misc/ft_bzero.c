@@ -6,11 +6,13 @@
 /*   By: emedea <emedea@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:55:12 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/15 14:34:12 by emedea           ###   ########.fr       */
+/*   Updated: 2019/05/17 10:19:04 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, int n)
+#include <string.h>
+
+void	ft_bzero(void *s, size_t n)
 {
 	char *ch;
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/07 16:44:19 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/07 16:46:58 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/22 17:54:26 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/23 19:16:45 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 # define FT_FLOAT_H
 
 typedef struct			s_fl{
-	int					precision;
 	int					sign;
-	int					exp;
+	int					exponent;
 	long long			integer_part;
 	long double			fractional_part;
 }						t_fl;
 
 typedef struct			s_parts{
 	unsigned long int	mantissa : 64;
-	unsigned int		exponent : 15;
-	unsigned int		sign : 1;
+	unsigned			exponent : 15;
+	unsigned			sign : 1;
 }						t_parts;
 
 typedef union			u_fl_parts{

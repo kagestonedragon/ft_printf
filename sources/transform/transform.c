@@ -1,29 +1,30 @@
- #include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transform.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/23 18:05:55 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/24 19:27:23 by emedea           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int     transform(t_printf *pf, va_list args, int *len)
+#include "ft_printf.h"
+#include <stdarg.h>
+
+int		transform(t_printf *pf, va_list args)
 {
-    if (pf->type.exist == true)
-    {
-        if (pf->type.d == true)
-			choose_length_decimal(pf, args, len);
-        /*else if (pf->type.i == true)
-            transform_i(pf, len);
-        else if (pf->type.u == true)
-            transform_u(pf, len);
-        else if (pf->type.f == true)
-            transform_f(pf, len);
-        else if (pf->type.x == true)
-            transform_x(pf, len);
-        else if (pf->type.hx == true)
-            transform_hx(pf, len);
-        else if (pf->type.o == true)
-            transform_o(pf, len);
-        else if (pf->type.s == true)
-            transform_s(pf, len);
-        else if (pf->type.c == true)
-            transform_c(pf, len);
-        else if (pf->type.p == true)
-            transform_p(pf, len);*/
-    }
-    return (0);
+	int	length;
+
+	length = 0;
+	if (pf->type.exist)
+	{
+		length = (pf->type.d || pf->type.i) ? choose_length_decimal(pf, args) : length;
+		length = (pf->type.f) ? transform_f(pf, args) : length;
+		length = (pf->type.c) ? transform_c(pf, args) : length;
+		length = (pf->type.s) ? transform_s(pf, args) : length;
+		length = (pf->type.percent) ? transform_percent() : length;
+	}
+	return (length);
 }
