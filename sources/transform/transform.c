@@ -6,7 +6,7 @@
 /*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 18:05:55 by emedea            #+#    #+#             */
-/*   Updated: 2019/08/24 19:27:23 by emedea           ###   ########.fr       */
+/*   Updated: 2019/08/25 15:56:47 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		transform(t_printf *pf, va_list args)
 		length = (pf->type.s) ? transform_s(pf, args) : length;
         length = (pf->type.x) ? transform_x(pf, args) : length;
         length = (pf->type.hx) ? transform_hx(pf, args) : length;
+		length = (pf->type.p) ? transform_p(pf, args) : length;
 		length = (pf->type.percent) ? transform_percent() : length;
 	}
 	return (length);

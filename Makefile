@@ -33,7 +33,7 @@ SRC_TRANSFORM_BUFFER_X_PATH = sources/transform/buffer/x/
 SRC_TRANSFORM_TYPES_PATH = sources/transform/types/
 
 SRC_FILES = ft_printf.c 
-SRC_MISC_FILES = ft_atoi.c ft_bzero.c ft_itoa.c ft_itoa_base.c ft_itoa_l.c ft_itoa_ll.c ft_memset.c ft_power.c ft_strcat.c ft_strcat_1.c ft_strlen.c ft_strncmp.c skip_numbers.c toupper_str.c 
+SRC_MISC_FILES = ft_atoi.c ft_bzero.c ft_itoa.c ft_itoa_base.c ft_itoa_base_ul.c ft_itoa_l.c ft_itoa_ll.c ft_memset.c ft_power.c ft_strcat.c ft_strcat_1.c ft_strlen.c ft_strncmp.c skip_numbers.c toupper_str.c 
 SRC_PARSE_FILES = parse.c 
 SRC_PARSE_FIND_FILES = parse_flags.c parse_length.c parse_precision.c parse_type.c parse_width.c 
 SRC_PARSE_FIND_LENGTH_FILES = find_length_h.c find_length_hh.c find_length_hl.c find_length_l.c find_length_ll.c 
@@ -49,7 +49,7 @@ SRC_TRANSFORM_BUFFER_D_FILES = add_precision_to_buffer_d.c add_width_to_buffer_d
 SRC_TRANSFORM_BUFFER_F_FILES = add_width_to_buffer_f.c create_buffer_f.c 
 SRC_TRANSFORM_BUFFER_S_FILES = add_string_to_buffer.c add_width_to_buffer_s.c create_buffer_s.c 
 SRC_TRANSFORM_BUFFER_X_FILES = add_width_to_buffer_x.c create_buffer_x.c 
-SRC_TRANSFORM_TYPES_FILES = choose_length_decimal.c transform_c.c transform_d.c transform_d_add.c transform_f.c transform_percent.c transform_s.c 
+SRC_TRANSFORM_TYPES_FILES = choose_length_decimal.c transform_c.c transform_d.c transform_d_add.c transform_f.c transform_p.c transform_percent.c transform_s.c 
 
 OBJ__CORE = $(addprefix $(OBJ_PATH), $(SRC_FILES:.c=.o))
 OBJ_MISC_CORE = $(addprefix $(OBJ_PATH), $(SRC_MISC_FILES:.c=.o))

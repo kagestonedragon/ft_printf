@@ -1,9 +1,13 @@
 #include "includes/ft_printf.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int		main(void)
 {
-	ft_printf("%0.2X\n", 2147483647);
-	printf("%0.2X", 2147483647);
+	int	*jopa;
+
+	jopa = (int *)malloc(sizeof(int));
+	ft_printf("%p\n", jopa);
+	printf("%p", jopa);
 	return (0);
 }
