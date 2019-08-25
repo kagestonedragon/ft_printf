@@ -29,10 +29,11 @@ SRC_TRANSFORM_BUFFER_C_PATH = sources/transform/buffer/c/
 SRC_TRANSFORM_BUFFER_D_PATH = sources/transform/buffer/d/
 SRC_TRANSFORM_BUFFER_F_PATH = sources/transform/buffer/f/
 SRC_TRANSFORM_BUFFER_S_PATH = sources/transform/buffer/s/
+SRC_TRANSFORM_BUFFER_X_PATH = sources/transform/buffer/x/
 SRC_TRANSFORM_TYPES_PATH = sources/transform/types/
 
 SRC_FILES = ft_printf.c 
-SRC_MISC_FILES = ft_atoi.c ft_bzero.c ft_itoa.c ft_itoa_l.c ft_itoa_ll.c ft_memset.c ft_power.c ft_strcat.c ft_strcat_1.c ft_strlen.c ft_strncmp.c skip_numbers.c 
+SRC_MISC_FILES = ft_atoi.c ft_bzero.c ft_itoa.c ft_itoa_base.c ft_itoa_l.c ft_itoa_ll.c ft_memset.c ft_power.c ft_strcat.c ft_strcat_1.c ft_strlen.c ft_strncmp.c skip_numbers.c toupper_str.c 
 SRC_PARSE_FILES = parse.c 
 SRC_PARSE_FIND_FILES = parse_flags.c parse_length.c parse_precision.c parse_type.c parse_width.c 
 SRC_PARSE_FIND_LENGTH_FILES = find_length_h.c find_length_hh.c find_length_hl.c find_length_l.c find_length_ll.c 
@@ -47,6 +48,7 @@ SRC_TRANSFORM_BUFFER_C_FILES = add_width_to_buffer_c.c create_buffer_c.c
 SRC_TRANSFORM_BUFFER_D_FILES = add_precision_to_buffer_d.c add_width_to_buffer_d.c create_buffer_d.c 
 SRC_TRANSFORM_BUFFER_F_FILES = add_width_to_buffer_f.c create_buffer_f.c 
 SRC_TRANSFORM_BUFFER_S_FILES = add_string_to_buffer.c add_width_to_buffer_s.c create_buffer_s.c 
+SRC_TRANSFORM_BUFFER_X_FILES = add_width_to_buffer_x.c create_buffer_x.c 
 SRC_TRANSFORM_TYPES_FILES = choose_length_decimal.c transform_c.c transform_d.c transform_d_add.c transform_f.c transform_percent.c transform_s.c 
 
 OBJ__CORE = $(addprefix $(OBJ_PATH), $(SRC_FILES:.c=.o))
@@ -65,9 +67,10 @@ OBJ_TRANSFORM_BUFFER_C_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_BUFFER_C_
 OBJ_TRANSFORM_BUFFER_D_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_BUFFER_D_FILES:.c=.o))
 OBJ_TRANSFORM_BUFFER_F_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_BUFFER_F_FILES:.c=.o))
 OBJ_TRANSFORM_BUFFER_S_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_BUFFER_S_FILES:.c=.o))
+OBJ_TRANSFORM_BUFFER_X_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_BUFFER_X_FILES:.c=.o))
 OBJ_TRANSFORM_TYPES_CORE = $(addprefix $(OBJ_PATH), $(SRC_TRANSFORM_TYPES_FILES:.c=.o))
 
-OBJECTS = $(OBJ__CORE) $(OBJ_MISC_CORE) $(OBJ_PARSE_CORE) $(OBJ_PARSE_FIND_CORE) $(OBJ_PARSE_FIND_LENGTH_CORE) $(OBJ_PARSE_INIT_CORE) $(OBJ_PARSE_SAVE_CORE) $(OBJ_PARSE_SAVE_LENGTH_CORE) $(OBJ_PARSE_SAVE_TYPE_CORE) $(OBJ_TESTS_CORE) $(OBJ_TRANSFORM_CORE) $(OBJ_TRANSFORM_BUFFER_CORE) $(OBJ_TRANSFORM_BUFFER_C_CORE) $(OBJ_TRANSFORM_BUFFER_D_CORE) $(OBJ_TRANSFORM_BUFFER_F_CORE) $(OBJ_TRANSFORM_BUFFER_S_CORE) $(OBJ_TRANSFORM_TYPES_CORE) 
+OBJECTS = $(OBJ__CORE) $(OBJ_MISC_CORE) $(OBJ_PARSE_CORE) $(OBJ_PARSE_FIND_CORE) $(OBJ_PARSE_FIND_LENGTH_CORE) $(OBJ_PARSE_INIT_CORE) $(OBJ_PARSE_SAVE_CORE) $(OBJ_PARSE_SAVE_LENGTH_CORE) $(OBJ_PARSE_SAVE_TYPE_CORE) $(OBJ_TESTS_CORE) $(OBJ_TRANSFORM_CORE) $(OBJ_TRANSFORM_BUFFER_CORE) $(OBJ_TRANSFORM_BUFFER_C_CORE) $(OBJ_TRANSFORM_BUFFER_D_CORE) $(OBJ_TRANSFORM_BUFFER_F_CORE) $(OBJ_TRANSFORM_BUFFER_S_CORE) $(OBJ_TRANSFORM_BUFFER_X_CORE) $(OBJ_TRANSFORM_TYPES_CORE) 
 
 all: $(NAME)
 
@@ -150,6 +153,10 @@ objects/%.o: $(SRC_TRANSFORM_BUFFER_F_PATH)%.c | objects
 		@(echo $< "->" $@)
 
 objects/%.o: $(SRC_TRANSFORM_BUFFER_S_PATH)%.c | objects
+		@($(GCC) $(GCC_FLAGS) $(GCC_INCLUDE) -c $< -o $@)
+		@(echo $< "->" $@)
+
+objects/%.o: $(SRC_TRANSFORM_BUFFER_X_PATH)%.c | objects
 		@($(GCC) $(GCC_FLAGS) $(GCC_INCLUDE) -c $< -o $@)
 		@(echo $< "->" $@)
 

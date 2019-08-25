@@ -3,7 +3,7 @@
 
 int		main(void)
 {
-	//ft_printf("%hhd  %% popa", 52456);
-	ft_printf("%10.2s", "JOPA");
+	ft_printf("%0.2X\n", 2147483647);
+	printf("%0.2X", 2147483647);
 	return (0);
 }

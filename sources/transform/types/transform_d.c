@@ -33,7 +33,7 @@ char			*collect_decimal(t_printf *pf, char *temp_buffer, int sign)
 	{
 		add_width_to_buffer_d(buffer, pf, &i, sign);
 		add_sign_to_buffer(buffer, pf, &i, sign);
-		add_precision_to_buffer_d(buffer, pf, & i);
+		add_precision_to_buffer_d(buffer, pf, &i);
 		ft_strcat_1(buffer, temp_buffer);
 		i += pf->number_of_signs;
 	}
@@ -41,7 +41,6 @@ char			*collect_decimal(t_printf *pf, char *temp_buffer, int sign)
 	{
 		add_width_to_buffer_d(buffer, pf, &i, sign);
 		ft_strcat_1(buffer, temp_buffer);
-		i = pf->number_of_signs;
 	}
 	return (buffer);
 }

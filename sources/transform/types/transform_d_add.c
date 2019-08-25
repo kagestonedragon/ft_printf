@@ -14,12 +14,41 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int			transform_d_l(t_printf *pf, va_list args)
+char                *collect_hexadecimal(t_printf *pf, char *temp_buffer)
 {
-	char	*buffer;
-	char	*temp_buffer;
-	long	d;
-	int		length;
+    int             i;
+    char            *buffer;
+
+    i = 0;
+    buffer = create_buffer_x(pf);
+    if (pf->flag.minus)
+    {
+        add_precision_to_buffer_d(buffer, pf, &i);
+        ft_strcat_1(buffer, temp_buffer);
+        i += pf->number_of_signs;
+        add_width_to_buffer_x(buffer, pf, &i);
+    }
+    else if (!pf->flag.minus)
+    {
+        add_width_to_buffer_x(buffer, pf, &i);
+        add_precision_to_buffer_d(buffer, pf, &i);
+        ft_strcat_1(buffer, temp_buffer);
+        i += pf->number_of_signs;
+    }
+    else if (pf->flag.zero && !pf->precision.exist)
+    {
+        add_width_to_buffer_x(buffer, pf, &i);
+        ft_strcat_1(buffer, temp_buffer);
+    }
+    return (buffer);
+}
+
+int			        transform_d_l(t_printf *pf, va_list args)
+{
+	char	        *buffer;
+	char	        *temp_buffer;
+	long	        d;
+	int		        length;
 
 	d = (long)va_arg(args, void*);
 	temp_buffer = ft_itoa_l(d);
@@ -30,4 +59,41 @@ int			transform_d_l(t_printf *pf, va_list args)
 	free(temp_buffer);
 	free(buffer);
 	return (length);
+}
+
+int                 transform_x(t_printf *pf, va_list args)
+{
+    char            *buffer;
+    char            *temp_buffer;
+    unsigned int    d;
+    int             length;
+
+    d = va_arg(args, unsigned int);
+    temp_buffer = ft_itoa_base(d, 16);
+    pf->number_of_signs = ft_strlen(temp_buffer);
+    buffer = collect_hexadecimal(pf, temp_buffer);
+    length = ft_strlen(buffer);
+    write(1, buffer, length);
+    free(temp_buffer);
+    free(buffer);
+    return (length);
+}
+
+int                 transform_hx(t_printf *pf, va_list args)
+{
+    char            *buffer;
+    char            *temp_buffer;
+    unsigned int    d;
+    int             length;
+
+    d = va_arg(args, unsigned int);
+    temp_buffer = ft_itoa_base(d, 16);
+    toupper_str(temp_buffer);
+    pf->number_of_signs = ft_strlen(temp_buffer);
+    buffer = collect_hexadecimal(pf, temp_buffer);
+    length = ft_strlen(buffer);
+    write(1, buffer, length);
+    free(temp_buffer);
+    free(buffer);
+    return (length);
 }

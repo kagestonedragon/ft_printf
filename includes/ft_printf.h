@@ -102,6 +102,8 @@ int			transform_d_l(t_printf *pf, va_list args);
 int			transform_percent(void);
 int			transform_c(t_printf *pf, va_list args);
 int			transform_s(t_printf *pf, va_list args);
+int         transform_x(t_printf *pf, va_list args);
+int         transform_hx(t_printf *pf, va_list args);
 int			choose_length_decimal(t_printf *pf, va_list args);
 
 /*
@@ -119,6 +121,8 @@ long long	ft_power(int n, int power);
 void		ft_bzero(void *s, size_t n);
 size_t		ft_strlen(const char *s);
 void		*ft_memset(void *b, int c, size_t len);
+char        *ft_itoa_base(int value, char base);
+int         toupper_str(char *str);
 
 /*
  * Buffer
@@ -138,6 +142,9 @@ int			add_width_to_buffer_c(char *buffer, t_printf *pf, int *position);
 char		*create_buffer_s(t_printf *pf);
 int			add_string_to_buffer(char *buffer, char *temp_buffer, t_printf *pf, int *position);
 int			add_width_to_buffer_s(char *buffer, t_printf *pf, int *position);
+
+char        *create_buffer_x(t_printf *pf);
+int         add_width_to_buffer_x(char *buffer, t_printf *pf, int *position);
 
 int			test_parse(t_printf *pf);		
 

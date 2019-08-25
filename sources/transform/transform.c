@@ -24,6 +24,8 @@ int		transform(t_printf *pf, va_list args)
 		length = (pf->type.f) ? transform_f(pf, args) : length;
 		length = (pf->type.c) ? transform_c(pf, args) : length;
 		length = (pf->type.s) ? transform_s(pf, args) : length;
+        length = (pf->type.x) ? transform_x(pf, args) : length;
+        length = (pf->type.hx) ? transform_hx(pf, args) : length;
 		length = (pf->type.percent) ? transform_percent() : length;
 	}
 	return (length);
