@@ -12,7 +12,7 @@ void        parse_width(t_printf *pf, const char *format, int *i, va_list args)
     else if (format[*i] >= '0' && format[*i] <= '9')
     {
         pf->width.exist = true;
-        pf->width.width = pf_atoi(format[*i], i);
+        pf->width.width = pf_atoi(&format[*i], i);
     }
     else
         pf->width.exist = false;

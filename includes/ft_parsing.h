@@ -17,12 +17,12 @@ typedef struct  s_flag{
 
 typedef struct  s_width{
     t_bool      exist;
-    t_bool      width;
+    int			width;
 }               t_width;
 
 typedef struct  s_precision{
     t_bool      exist;
-    t_bool      precision;
+	int			precision;
 }               t_precision;
 
 typedef struct  s_length{
@@ -31,11 +31,11 @@ typedef struct  s_length{
     t_bool      ll;
     t_bool      h;
     t_bool      l;
-    t_bool      hx;
+    t_bool      hl;
 }               t_length;
 
 typedef struct  s_sign{
-    t_bool      exist;
+    int			exist;
     int         sign;
 }               t_sign;
 
@@ -43,7 +43,6 @@ typedef struct  s_type{
     char        buffer[1024];
     char        temporary_buffer[512];
     int         position;
-    int         string_length;
     int         digits;
     t_sign      sign;
 }               t_type;

@@ -3,15 +3,15 @@
 
 static t_bool   is_flag(t_printf *pf, char f)
 {
-    if (c == '0')
+    if (f == '0')
         return ((pf->flag.zero = true));
-    else if (c == '-')
-        return ((pf->flag.zero ? pf->flag.zero : (pf->flag.minus = true)));
-    else if (c == '+')
+    else if (f == '-')
+        return ((pf->flag.minus = true));
+    else if (f == '+')
         return ((pf->flag.plus = true));
-    else if (c == ' ')
-        return ((pf->flag.plus ? pf->flag.plus : (pf->flag.space = true)));
-    else if (c == '#')
+    else if (f == ' ')
+        return ((pf->flag.space = true));
+    else if (f == '#')
         return ((pf->flag.hash = true));
     return (false);
 }
@@ -19,7 +19,7 @@ static t_bool   is_flag(t_printf *pf, char f)
 void            parse_flags(t_printf *pf, const char *format, int *i)
 {
     *i += 1;
-    while (if_flag(pf, format[*i]))
+    while (is_flag(pf, format[*i]))
     {
         pf->flag.exist = true;
         *i += 1;

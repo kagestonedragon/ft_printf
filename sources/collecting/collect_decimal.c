@@ -1,39 +1,83 @@
 #include "ft_printf.h"
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
 
-static void add_sign(t_printf *pf)
+void		create_sign(t_printf *pf, int sign)
+{
+	if (!sign)
+	{
+		pf->type.sign.exist = true;
+		pf->type.sign.sign = 45;
+	}
+	else if (pf->flag.plus)
+	{
+		pf->type.sign.exist = true;
+		pf->type.sign.sign = 43;
+	}
+	else if (pf->flag.space)
+	{
+		pf->type.sign.exist = true;
+		pf->type.sign.sign = ' ';
+	}
+	else
+		pf->type.sign.exist = false;
+}
+
+void add_sign(t_printf *pf)
 {
     if (pf->type.sign.exist)
-        pf->buffer[pf->position++] = pf->type.sign.sign;
-    pf->type.sign.exist = 0;
+        pf->type.buffer[pf->type.position++] = pf->type.sign.sign;
 }
 
-static void add_precision(t_printf *pf, int size)
+void add_precision(t_printf *pf)
 {
-    if ((pf->precision.precision -= pf->type.digits) <= 0)
+	int	temporary;
+
+	temporary = pf->precision.precision;
+    if ((temporary -= pf->type.digits) <= 0)
         return ;
-    while (pf->precision.precision--)
-        pf->buffer[pf->position++] = '0';
+    while (temporary--)
+        pf->type.buffer[pf->type.position++] = '0';
 }
 
-static void add_width(t_printf *pf, int character)
+void add_width(t_printf *pf, int character)
 {
-    if ((pf->width.width -= (pf->precision.precision > pf->type.digits ? pf->precision.precision : pf->type.digits) - pf->type.sign.exist) <= 0)
+    if ((pf->width.width -= ((pf->precision.precision > pf->type.digits ? pf->precision.precision : pf->type.digits) + pf->type.sign.exist)) <= 0)
         return ;
     while (pf->width.width--)
-        pf->buffer[pf->position++] = character;
+        pf->type.buffer[pf->type.position++] = character;
 }
 
-static void add_temporary(t_printf *pf)
+void add_temporary(t_printf *pf)
 {
     int     i;
 
     i = -1;
-    while (*temporary_buffer)
-        pf->buffer[pf->position++] = pf->temporary_buffer[++i];
+    while (pf->type.temporary_buffer[++i])
+        pf->type.buffer[pf->type.position++] = pf->type.temporary_buffer[i];
 }
 
-int         collect_decimal(t_printf *pf, va_list args)
+void		get_temporary_buffer(t_printf *pf, va_list args)
 {
+	if (pf->length.exist)
+	{
+		if (pf->length.hh)
+			pf_itoa(pf, (char)va_arg(args, void*));
+		else if (pf->length.h)
+			pf_itoa(pf, (short)va_arg(args, void*));
+		else if (pf->length.l)
+			pf_litoa(pf, (long)va_arg(args, void *));
+		else if (pf->length.ll)
+			pf_llitoa(pf, (long long)va_arg(args, void *));
+	}
+	else
+		pf_itoa(pf, va_arg(args, int));
+}
+
+void		collect_decimal(t_printf *pf, va_list args)
+{
+	get_temporary_buffer(pf, args);
     if (!pf->flag.minus && !pf->flag.zero)
     {
         add_width(pf, ' ');
@@ -48,12 +92,12 @@ int         collect_decimal(t_printf *pf, va_list args)
         add_temporary(pf);
         add_width(pf, ' ');
     }
-    else if (pf->flag.zero)
+    else
     {
         add_sign(pf);
-        add_width(pf, ' ');
+        add_width(pf, (pf->precision.exist ? ' ' : '0'));
         add_precision(pf);
         add_temporary(pf);
     }
-    return (1);
+	pf->type.buffer[pf->type.position] = '\0';
 }

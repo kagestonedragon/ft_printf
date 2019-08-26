@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <stdlib.h>
 
 static void     initialize_flags(t_printf *pf)
 {
@@ -17,17 +18,18 @@ static void     initialize_length(t_printf *pf)
     pf->length.ll = false;
     pf->length.h = false;
     pf->length.l = false;
-    pf->length.hx = false;
+    pf->length.hl = false;
 }
 
-t_printf        initialization(int file_descriptor)
+t_printf        *initialization(int file_descriptor)
 {
     t_printf    *pf;
 
     pf = (t_printf *)malloc(sizeof(t_printf));
     pf->file_descriptor = file_descriptor;
-    pf->string_length = 0;
-    pf->buffer[0] = '\0';
+    pf->type.digits = 0;
+	pf->type.position = 0;
+    pf->type.buffer[0] = '\0';
     initialize_flags(pf);
     initialize_length(pf);
     return (pf);

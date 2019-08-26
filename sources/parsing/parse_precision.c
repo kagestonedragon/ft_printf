@@ -14,9 +14,12 @@ void        parse_precision(t_printf *pf, const char *format, int *i, va_list ar
         else if (format[*i] >= '0' && format[*i] <= '9')
         {
             pf->precision.exist = true;
-            pf->precision.precision = pf_atoi(format[*i], i);
+            pf->precision.precision = pf_atoi(&format[*i], i);
         }
         else
+		{
             pf->precision.exist = false;
-    }
+			pf->precision.precision = 0;	
+    	}
+	}
 }
