@@ -1,10 +1,10 @@
-#include <stdio.h>
 #include "includes/ft_printf.h"
+#include <stdio.h>
 
-int			main(void)
+int main(void)
 {
-	ft_printf("%#8x\n", 42);
-	/*printf("%5.d\n", 0); 
-	ft_printf("%lld", -9223372036854775808);*/
-	//printf("%p %p %p", 5, 5, 5);
+    //printf("%llu", d);
+    //ft_printf("@moulitest: %#.x %#.0x\n", 0, 0);
+    printf("%.0s", "JOPA");
+    return (0);
 }

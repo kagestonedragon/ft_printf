@@ -1,81 +1,48 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# include "ft_parsing.h"
+# include "defines.h"
+# include "structures.h"
 # include <stdarg.h>
 
 /*
- * Printf
+ * PRINTF
  */
-int				ft_printf(const char *format, ...);
-int				ft_sprintf(char *buffer, const char *format, ...);
-int				ft_dpritnf(int fd, const char *format, ...);
+int         ft_printf(const char *format, ...);
 
 /*
- * Parsing
+ * PARSING
  */
-t_printf		*initialization(int file_descriptor);
-int				parsing(int file_descriptor,const char *format, int *i, va_list args);
-void			parse_flags(t_printf *pf, const char *format, int *i);
-void			parse_width(t_printf *pf, const char *format, int *i, va_list args);
-void			parse_precision(t_printf *pf, const char *format, int *i, va_list args);
-void			parse_length(t_printf *pf, const char *format, int *i);
-void			parse_type(t_printf *pf, const char *format, int *i, va_list args);
-
+int         parsing(const char *format, int *i, va_list args);
+int         flag_parsing(t_printf *p, const char *format, int *i);
+int         width_parsing(t_printf *p, const char *format, int *i, va_list args);
+int         precision_parsing(t_printf *p, const char *format, int *i, va_list args);
+int         length_parsing(t_printf *p, const char *format, int *i);
+int         type_parsing(t_printf *p, const char *format, int *i);
 
 /*
- * Buffer
+ * COLLECTING
  */
-void			add_sign(t_printf *pf);
-void			add_precision(t_printf *pf);
-void			add_width(t_printf *pf, int character);
-void			add_temporary(t_printf *pf);
+int         collecting(t_printf *p, va_list args);
+int         decimal_collecting(t_printf *p, va_list args);
+int         octadecimal_collecting(t_printf *p, va_list args);
+int         unsigned_collecting(t_printf *p, va_list args);
+int         hexadecimal_collecting(t_printf *p, va_list args);
+int         percent_collecting(t_printf *p);
+int         string_collecting(t_printf *p, va_list args);
+int         character_collecting(t_printf *p, va_list args);
 
 /*
- * Collecting
+ * CALCULATING
  */
-void			create_sign(t_printf *pf, int sign);
-void			collect_decimal(t_printf *pf, va_list args);
-void			collect_unsigned(t_printf *pf, va_list args);
-void			collect_hexadecimal(t_printf *pf, va_list args);
-void			collect_octaldecimal(t_printf *pf, va_list args);
-void			collect_string(t_printf *pf, va_list args);
+int         width_calculating(t_printf *p);
+int         precision_calculating(t_printf *p);
 
 /*
- * Signed size
+ * MISCELLANEOUS
  */
-int				digits(int n, int base);
-int				l_digits(long n, int base);
-int				ll_digits(long long n, int base);
-
-/*
- * Unsigned size
- */
-int				u_digits(unsigned int n, int base);
-int				lu_digits(unsigned long n, int base);
-int				llu_digits(unsigned long long n, int base);
-
-/*
- * Unsigned Itoa Base
- */
-void			pf_utoa_base(t_printf *pf, unsigned int value, int base);
-void			pf_lutoa_base(t_printf *pf, unsigned long value, int base);
-void			pf_llutoa_base(t_printf *pf, unsigned long long value, int base);
-
-
-/*
- * Miscellaneous
- */
-int				digits(int n, int base);
-int				l_digits(long n, int base);
-int				ll_digits(long long n, int base);
-int             pf_atoi(const char *str, int *i);
-void			pf_itoa(t_printf *pf, int n);
-void			pf_litoa(t_printf *pf, long n);
-void			pf_llitoa(t_printf *pf, long long n);
-void			pf_utoa(t_printf *pf, unsigned int n);
-void			pf_lutoa(t_printf *pf, unsigned long n);
-void			pf_llutoa(t_printf *pf, unsigned long long n);
-void			pf_strcat(t_printf *pf, char *str, int s, int e);
-void			string_tolower(char *s);
+int         p_atoi(const char *str, int *i);
+char        *p_itoa_base(t_printf *p, unsigned long long value, int base);
+char        *new_string(const char *source);
+int         p_strlen(const char *source);
 
 #endif

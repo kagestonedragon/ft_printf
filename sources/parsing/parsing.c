@@ -1,20 +1,33 @@
 #include "ft_printf.h"
 #include <stdlib.h>
-#include <unistd.h>
 
-int             parsing(int file_descriptor, const char *format, int *i, va_list args)
+static t_printf *initialization()
 {
-    t_printf    *pf;
-	int			length;
+    t_printf    *p;
 
-    pf = initialization(file_descriptor);
-    parse_flags(pf,format, i);
-    parse_width(pf, format, i, args);
-    parse_precision(pf, format, i, args);
-    parse_length(pf, format, i);
-    parse_type(pf, format, i, args);
-	write(pf->file_descriptor, pf->type.buffer, pf->type.position);
-	length = pf->type.position;
-	free(pf);
-	return (length);
+    p = (t_printf *)malloc(sizeof(t_printf));
+    p->flag.minus = 0;
+    p->flag.plus = 0;
+    p->flag.space = 0;
+    p->flag.zero = 0;
+    p->flag.hash = 0;
+    p->width = 0;
+    p->length = 0;
+    p->type = 0;
+    return (p);
+}
+
+int             parsing(const char *format, int *i, va_list args)
+{
+    int         length;
+    t_printf    *p;
+
+    p = initialization();
+    flag_parsing(p, format, i);
+    width_parsing(p, format, i, args);
+    precision_parsing(p, format, i, args);
+    length_parsing(p, format, i);
+    type_parsing(p, format, i);
+    length = collecting(p,args);
+    return (length);
 }
