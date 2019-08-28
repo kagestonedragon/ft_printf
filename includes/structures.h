@@ -6,6 +6,32 @@ typedef enum{
     true
 }   t_bool;
 
+/*
+ * FLOAT / DOUBLE
+ */
+
+typedef struct			s_fl{
+	int					sign;
+	int					exponent;
+	long long			integer_part;
+	long double			fractional_part;
+}						t_fl;
+
+typedef struct			s_parts{
+	unsigned long int	mantissa : 64;
+	unsigned			exponent : 15;
+	unsigned			sign : 1;
+}						t_parts;
+
+typedef union			u_fl_parts{
+	long double			f;
+	t_parts				bytes;
+}						t_fl_parts;
+
+/*
+ * PARSING
+ */
+
 typedef struct      s_sign{
     char            *value;
     int             length;

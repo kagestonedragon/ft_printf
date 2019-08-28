@@ -17,6 +17,7 @@
 # define LEN_LL         219
 # define LEN_H          104
 # define LEN_L          108
+# define LEN_HL			76
 
 /*
  * TYPE

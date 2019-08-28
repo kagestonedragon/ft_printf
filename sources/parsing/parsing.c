@@ -14,6 +14,8 @@ static t_printf *initialization()
     p->width = 0;
     p->length = 0;
     p->type = 0;
+	p->sign.value = new_string("");
+	p->sign.length = 0;
     return (p);
 }
 
@@ -22,6 +24,8 @@ int             parsing(const char *format, int *i, va_list args)
     int         length;
     t_printf    *p;
 
+	if (!format[*i + 1])
+		return (0);
     p = initialization();
     flag_parsing(p, format, i);
     width_parsing(p, format, i, args);

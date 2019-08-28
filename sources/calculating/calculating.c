@@ -1,6 +1,14 @@
 #include "ft_printf.h"
+#include <unistd.h>
 
-int     width_calculating(t_printf *p)
+static int	flags_correcting(t_printf *p)
+{
+	if (p->flag.minus && p->flag.zero)
+		p->flag.zero = false;
+	return (0);
+}
+
+int     	width_calculating(t_printf *p)
 {
     p->width -= p->sign.length;
     if (p->precision > p->arg.length)
@@ -10,8 +18,31 @@ int     width_calculating(t_printf *p)
     return ((p->width > 0) ? p->width : 0);
 }
 
-int     precision_calculating(t_printf *p)
+int     	precision_calculating(t_printf *p)
 {
     p->precision -= p->arg.length;
-    return ((p->precision > 0) ? p->precision : 0);
+	p->precision -= (p->type == TYPE_O && p->flag.hash) ? p->sign.length : 0;
+	return ((p->precision > 0) ? p->precision : 0);
+}
+
+int			write_to_console(t_printf *p)
+{
+	int	size;
+
+	flags_correcting(p);
+	size = p->width + p->precision + p->arg.length + p->sign.length;
+	if (!p->flag.minus && !p->flag.zero)
+	while (p->width--)
+		write(1, " ", 1);
+	(p->sign.length) ? write(1, p->sign.value, p->sign.length) : 0;
+	if (!p->flag.minus && p->flag.zero)
+		while (p->width--)
+			write(1, (p->precision > 0 ? " " : "0"), 1);
+	while (p->precision--)
+		write(1, "0", 1);
+	write(1, p->arg.value, p->arg.length);
+	if (p->flag.minus && !p->flag.zero)
+		while (p->width--)
+	write(1, " ", 1);
+	return (size);
 }

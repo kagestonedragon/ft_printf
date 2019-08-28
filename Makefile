@@ -20,9 +20,9 @@ SRC_MISCELLANEOUS_PATH = sources/miscellaneous/
 SRC_PARSING_PATH = sources/parsing/
 
 SRC_FILES = ft_printf.c 
-SRC_CALCULATING_FILES = calculating.c 
-SRC_COLLECTING_FILES = character_collecting.c collecting.c decimal_collecting.c hexadecimal_collecting.c octadecimal_collecting.c percent_collecting.c string_collecting.c unsigned_collecting.c 
-SRC_MISCELLANEOUS_FILES = new_string.c p_atoi.c p_itoa_base.c p_strlen.c 
+SRC_CALCULATING_FILES = calculating.c get_pieces.c 
+SRC_COLLECTING_FILES = address_collecting.c character_collecting.c collecting.c decimal_collecting.c float_collecting.c hexadecimal_collecting.c octadecimal_collecting.c percent_collecting.c string_collecting.c unsigned_collecting.c 
+SRC_MISCELLANEOUS_FILES = new_string.c p_atoi.c p_bzero.c p_itoa_base.c p_power.c p_strcat.c p_strlen.c to_lower.c 
 SRC_PARSING_FILES = flag_parsing.c length_parsing.c parsing.c precision_parsing.c type_parsing.c width_parsing.c 
 
 OBJ__CORE = $(addprefix $(OBJ_PATH), $(SRC_FILES:.c=.o))

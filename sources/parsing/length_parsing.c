@@ -22,5 +22,10 @@ int     length_parsing(t_printf *p, const char *format, int *i)
         p->length = LEN_H;
         *i += 1;
     }
+	else if (format[*i] == LEN_HL)
+	{
+		p->length = LEN_HL;
+		*i += 1;
+	}
     return (0);
 }

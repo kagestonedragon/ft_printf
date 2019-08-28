@@ -10,15 +10,17 @@ int     collecting(t_printf *p, va_list args)
         return (unsigned_collecting(p, args));
     else if (p->type == TYPE_LX || p->type == TYPE_HX)
         return(hexadecimal_collecting(p, args));
+	else if (p->type == TYPE_LF)
+		return (float_collecting(p, args));
     else if (p->type == TYPE_O)
         return (octadecimal_collecting(p, args));
     else if (p->type == TYPE_S)
         return (string_collecting(p, args));
     else if (p->type == TYPE_C)
         return (character_collecting(p, args));
-    /*else if (p->type == TYPE_P)
-        address_collecting(p, args);
-    else
+    else if (p->type == TYPE_P)
+        return (address_collecting(p, args));
+    /*else
         unknown_collecting(p, args);*/
     return (0);
 }
