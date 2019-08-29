@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   float_collecting.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 14:27:22 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:39:57 by rhulk            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 
-static long double	get_sign(t_printf *p, long double value)
+static long double		get_sign(t_printf *p, long double value)
 {
 	if (value < 0)
 		p->sign.value = new_string("-");
@@ -13,10 +25,10 @@ static long double	get_sign(t_printf *p, long double value)
 	return ((value > 0) ? value : -value);
 }
 
-static int			get_float(t_printf *p, va_list args)
+static int				get_float(t_printf *p, va_list args)
 {
-	t_fl			f_n;
-	long double		t;
+	t_fl				f_n;
+	long double			t;
 
 	if (p->length == LEN_HL)
 		t = va_arg(args, long double);
@@ -26,7 +38,7 @@ static int			get_float(t_printf *p, va_list args)
 	return (get_string(&f_n, p));
 }
 
-int					float_collecting(t_printf *p, va_list args)
+int						float_collecting(t_printf *p, va_list args)
 {
 	if (p->precision == -2 || p->precision == -1)
 		p->precision = 6;

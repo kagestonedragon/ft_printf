@@ -1,9 +1,21 @@
-int     p_strlen(const char *source)
-{
-    int size;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_strlen.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 14:17:41 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:18:15 by rhulk            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    size = 0;
-    while (source[size])
-        size++;
-    return (size);
+int			p_strlen(const char *source)
+{
+	int		size;
+
+	size = 0;
+	while (source[size])
+		size++;
+	return (size);
 }

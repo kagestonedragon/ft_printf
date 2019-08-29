@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_pieces.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 13:39:04 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 13:43:33 by rhulk            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 t_fl			get_pieces(long double f_n)
 {
@@ -8,11 +19,11 @@ t_fl			get_pieces(long double f_n)
 	t_fl		n;
 	int			i;
 
-	fl.f = f_n;	
+	fl.f = f_n;
 	n.exponent = fl.bytes.exponent - 16383;
 	i = ((64 - n.exponent - 1) * (-1)) - 1;
 	n.integer_part = 0;
-	n.fractional_part = 0;	
+	n.fractional_part = 0;
 	while (++i <= n.exponent)
 	{
 		if ((fl.bytes.mantissa & 1) && (i >= 0))
@@ -24,9 +35,9 @@ t_fl			get_pieces(long double f_n)
 	return (n);
 }
 
-void		round_fractional_part(t_fl *f_n, char *in, int precision)
+void			round_fractional_part(t_fl *f_n, char *in, int precision)
 {
-	int		i;
+	int			i;
 
 	if (precision == 0 && in[0] > '4' && f_n->integer_part > 0)
 		f_n->integer_part++;
@@ -46,17 +57,16 @@ void		round_fractional_part(t_fl *f_n, char *in, int precision)
 		else
 		{
 			in[precision] = '\0';
-			break;	
+			break ;
 		}
 	}
-	
 }
 
-static char	*get_string_fp(t_fl *f_n, t_printf *pf)
+static char		*get_string_fp(t_fl *f_n, t_printf *pf)
 {
-	char	*result;
-	int		temporary;
-	int		i;
+	char		*result;
+	int			temporary;
+	int			i;
 
 	result = (char *)malloc(sizeof(char) * 16);
 	p_bzero(result, 16);
@@ -73,14 +83,15 @@ static char	*get_string_fp(t_fl *f_n, t_printf *pf)
 	return (result);
 }
 
-int			get_string(t_fl *f_n, t_printf *p)
+int				get_string(t_fl *f_n, t_printf *p)
 {
-	char	*integer_part;
-	char	*fractional_part;
+	char		*integer_part;
+	char		*fractional_part;
 
 	fractional_part = get_string_fp(f_n, p);
 	integer_part = p_itoa_base(p, f_n->integer_part, 10);
-	p->arg.value = (char *)malloc(sizeof(char) * (p_strlen(integer_part) + p_strlen(fractional_part) + 2));
+	p->arg.value = (char *)malloc(sizeof(char) *
+			(p_strlen(integer_part) + p_strlen(fractional_part) + 2));
 	p->arg.value[0] = '\0';
 	p_strcat(p->arg.value, integer_part);
 	if (p->flag.hash || p->precision > 0)

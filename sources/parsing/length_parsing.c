@@ -1,31 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   length_parsing.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 13:52:36 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:55:43 by rhulk            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int     length_parsing(t_printf *p, const char *format, int *i)
+int		length_parsing(t_printf *p, const char *format, int *i)
 {
-    if (format[*i] == LEN_H && format[*i + 1] == LEN_H)
-    {
-        p->length = LEN_HH;
-        *i += 2;
-    }
-    else if (format[*i] == LEN_L && format[*i + 1] == LEN_L)
-    {
-        p->length = LEN_LL;
-        *i += 2;
-    }
-    else if (format[*i] == LEN_L)
-    {
-        p->length = LEN_L;
-        *i += 1;
-    }
-    else if (format[*i] == LEN_H)
-    {
-        p->length = LEN_H;
-        *i += 1;
-    }
+	if (format[*i] == LEN_H && format[*i + 1] == LEN_H)
+		p->length = LEN_HH;
+	else if (format[*i] == LEN_L && format[*i + 1] == LEN_L)
+		p->length = LEN_LL;
+	else if (format[*i] == LEN_L)
+		p->length = LEN_L;
+	else if (format[*i] == LEN_H)
+		p->length = LEN_H;
 	else if (format[*i] == LEN_HL)
-	{
 		p->length = LEN_HL;
+	if (p->length > 150)
+		*i += 2;
+	else if (p->length != 0)
 		*i += 1;
-	}
-    return (0);
+	return (0);
 }

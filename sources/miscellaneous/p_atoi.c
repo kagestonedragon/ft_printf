@@ -1,12 +1,24 @@
-int     p_atoi(const char *str, int *i)
-{
-    int result;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   p_atoi.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/29 14:19:15 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:19:47 by rhulk            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    result = 0;
-    while (str[*i] && (str[*i] >= '0' && str[*i] <= '9'))
-    {
-        result = (result * 10) + (str[*i] - '0');
-        *i += 1;
-    }
-    return (result);
+int			p_atoi(const char *str, int *i)
+{
+	int		result;
+
+	result = 0;
+	while (str[*i] && (str[*i] >= '0' && str[*i] <= '9'))
+	{
+		result = (result * 10) + (str[*i] - '0');
+		*i += 1;
+	}
+	return (result);
 }
