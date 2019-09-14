@@ -5,9 +5,13 @@ The main reason is the ease of its formatting, and the support of diverse types 
 Some variations even propose to be able to write the resulting string of characters either in a file descriptor or in a particular stream. 
 Some also propose to recall this string without printing it. In short, undeniably, printf is a vital function.
 
-### What is done
+```c
+int    ft_printf(char *format, ...);
+```
 
 <b>%[parameter][flags][width][.precision][length]type</b>
+
+### What is done
 
 * `Flags field`
   * `-` — left-align the output of this placeholder
