@@ -9,7 +9,7 @@ Some also propose to recall this string without printing it. In short, undeniabl
 int    ft_printf(char *format, ...);
 ```
 
-<b>%[parameter][flags][width][.precision][length]type</b>
+<b>%[flags][width][.precision][length]type</b>
 
 ### What is done
 
