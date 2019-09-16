@@ -30,7 +30,7 @@ int    ft_printf(char *format, ...);
   * `L` — for floating point types, causes `printf` to expect a `long double` argument
   * `z` — for integer types, causes `printf` to expect a `size_t`-sized integer argument
   
-* `Length field`
+* `Types`
   * `%` — prints a literal % character
   * `d` — `int` as a signed integer.
   * `i` — `int` as a signed integer.
