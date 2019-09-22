@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   p_atoi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 14:19:15 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:19:47 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <unistd.h>
-
-int					ft_printf(const char *format, ...)
+int			p_atoi(const char *str, int *i)
 {
-	va_list			args;
-	int				length;
-	int				i;
+	int		result;
 
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
+	result = 0;
+	while (str[*i] && (str[*i] >= '0' && str[*i] <= '9'))
 	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
-		else
-			write(1, &format[i], 1);
-		length++;
+		result = (result * 10) + (str[*i] - '0');
+		*i += 1;
 	}
-	va_end(args);
-	return (length);
+	return (result);
 }

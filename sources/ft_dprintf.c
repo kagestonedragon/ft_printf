@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 15:48:19 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/29 17:00:15 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <unistd.h>
 
-int					ft_printf(const char *format, ...)
+int					ft_dprintf(int fd, const char *format, ...)
 {
 	va_list			args;
 	int				length;
 	int				i;
 
+	if (fd == -1)
+		return (0);
 	i = -1;
 	length = 0;
 	va_start(args, format);
 	while (format[++i])
 	{
 		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
+			length += parsing(fd, format, &i, args) - 1;
 		else
-			write(1, &format[i], 1);
+			write(fd, &format[i], 1);
 		length++;
 	}
 	va_end(args);

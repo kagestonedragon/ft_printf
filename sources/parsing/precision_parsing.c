@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   precision_parsing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 13:51:16 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 13:52:13 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 
-int					ft_printf(const char *format, ...)
+int		precision_parsing(t_printf *p, const char *format, int *i, va_list args)
 {
-	va_list			args;
-	int				length;
-	int				i;
-
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
+	if (format[*i] == '.')
 	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
+		*i += 1;
+		if (format[*i] == '*')
+		{
+			*i += 1;
+			p->precision = va_arg(args, int);
+		}
+		else if (format[*i] >= '0' && format[*i] <= '9')
+			p->precision = p_atoi(format, i);
 		else
-			write(1, &format[i], 1);
-		length++;
+			p->precision = -1;
 	}
-	va_end(args);
-	return (length);
+	else
+		p->precision = -2;
+	return (0);
 }

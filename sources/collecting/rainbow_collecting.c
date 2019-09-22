@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   rainbow_collecting.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: emedea <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 16:56:03 by emedea            #+#    #+#             */
+/*   Updated: 2019/08/29 17:29:55 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <unistd.h>
 
-int					ft_printf(const char *format, ...)
+int				rainbow_collecting(t_printf *p, va_list args)
 {
-	va_list			args;
-	int				length;
-	int				i;
+	char		*temporary;
 
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
+	if (p->fd == 1)
 	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
+		temporary = (char *)va_arg(args, void*);
+		if (!temporary)
+			return (0);
 		else
-			write(1, &format[i], 1);
-		length++;
+			write(2, temporary, p_strlen(temporary));
 	}
-	va_end(args);
-	return (length);
+	return (0);
 }

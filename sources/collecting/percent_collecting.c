@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   percent_collecting.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 14:33:19 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 15:38:46 by emedea           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <unistd.h>
 
-int					ft_printf(const char *format, ...)
+static int		get_percent(t_printf *p)
 {
-	va_list			args;
-	int				length;
-	int				i;
+	p->arg.value = new_string("%");
+	return (p_strlen(p->arg.value));
+}
 
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
-	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
-		else
-			write(1, &format[i], 1);
-		length++;
-	}
-	va_end(args);
-	return (length);
+int				percent_collecting(t_printf *p)
+{
+	p->arg.length = get_percent(p);
+	p->width = width_calculating(p);
+	p->precision = 0;
+	return (write_to_console(p));
 }

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   new_string.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 14:07:20 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:51:35 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
+#include <stdlib.h>
 
-int					ft_printf(const char *format, ...)
+char		*new_string(const char *source)
 {
-	va_list			args;
-	int				length;
-	int				i;
+	char	*result;
+	int		size;
 
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
-	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
-		else
-			write(1, &format[i], 1);
-		length++;
-	}
-	va_end(args);
-	return (length);
+	size = p_strlen(source);
+	result = (char *)malloc(sizeof(char) * (size + 1));
+	result[size] = '\0';
+	while (size--)
+		result[size] = source[size];
+	return (result);
 }

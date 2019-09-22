@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   p_power.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhulk <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/29 14:43:54 by rhulk             #+#    #+#             */
-/*   Updated: 2019/08/29 16:55:25 by emedea           ###   ########.fr       */
+/*   Created: 2019/08/29 14:18:25 by rhulk             #+#    #+#             */
+/*   Updated: 2019/08/29 14:18:39 by rhulk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <unistd.h>
-
-int					ft_printf(const char *format, ...)
+long long		p_power(int value, int power)
 {
-	va_list			args;
-	int				length;
-	int				i;
-
-	i = -1;
-	length = 0;
-	va_start(args, format);
-	while (format[++i])
+	if (power < 0)
+		return (0);
+	else if (power == 0)
+		return (1);
+	else
 	{
-		if (format[i] == '%')
-			length += parsing(1, format, &i, args) - 1;
+		if (power % 2 == 0)
+			return (value * value * p_power(value, power - 2));
 		else
-			write(1, &format[i], 1);
-		length++;
+			return (value * p_power(value, power - 1));
 	}
-	va_end(args);
-	return (length);
 }
