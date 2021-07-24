@@ -1,5 +1,7 @@
 # ft_printf
 
+`Проект реализовывался в рамках обучения в "Школе 21". Разработка (осознание работы) функции "printf" на языке си.`
+
 Regardless of the programming language considered, the `printf` function,(or its equivalents) is always highly useful. 
 The main reason is the ease of its formatting, and the support of diverse types in variable numbers. 
 Some variations even propose to be able to write the resulting string of characters either in a file descriptor or in a particular stream. 
